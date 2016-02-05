@@ -21,3 +21,7 @@ A graphical interface to nftables, the new security framework for linux that aim
 ## Add rule view
 
 [add-rule](screenshots/add-rule.png)
+
+# LICENSE
+
+[MIT](LICENSE)
