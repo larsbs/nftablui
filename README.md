@@ -8,19 +8,19 @@ A graphical interface to nftables, the new security framework for linux that aim
 
 ## Tables view
 
-[tables](screenshots/tables.png)
+![tables](screenshots/tables.png)
 
 ## Table view
 
-[table](screenshots/table.png)
+![table](screenshots/table.png)
 
 ## Chain view
 
-[chain](screenshots/chain.png)
+![chain](screenshots/chain.png)
 
 ## Add rule view
 
-[add-rule](screenshots/add-rule.png)
+![add-rule](screenshots/add-rule.png)
 
 # LICENSE
 
