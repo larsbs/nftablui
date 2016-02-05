@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="location-header"><small>Familia</small> {{tables.family}}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="breadcrumb">
+      <li>
+        {{#link-to 'index'}}<i class="fa fa-home fa-fw"></i> Inicio{{/link-to}}
+      </li>
+      <li>
+        <i class="fa fa-database fa-fw"></i> {{tables.family}}
+      </li>
+    </div>
+  </div>
+</div>
+<ul class="list-inline cards-container">
+  {{#each tables as |table|}}
+    <li>
+      {{#link-to 'table' table}}
+      <div class="card panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-table fa-fw"></i> {{table.name}}
+        </div>
+        <div class="panel-body">
+          <strong>Familia:</strong> {{table.family}}<br>
+          <strong>Cadenas:</strong> {{table.chains.length}}<br>
+        </div>
+      </div>
+      {{/link-to}}
+    </li>
+  {{/each}}
+</ul>

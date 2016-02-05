@@ -1,0 +1,62 @@
+//---------------------------
+// CARDS
+//
+// Author: Lorenzo Ruiz
+//---------------------------
+
+.cards-container {
+  padding: 0 15px;
+
+  a {
+    text-decoration: none !important;
+    color: inherit;
+  }
+
+  .card {
+    min-width: 200px;
+    cursor: pointer;
+    transition: all 0.1s;
+    position: relative;
+
+    &:hover {
+      transform: translateZ(0) translateY(-2px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    i {
+      margin-right: 5px;
+    }
+
+    strong {
+      width: 120px;
+      display: inline-block;
+      margin-bottom: 3px;
+    }
+
+    &.add-card {
+      background: @sidebar-bg;
+      text-align: center;
+
+      .panel-heading, .panel-body {
+        visibility: hidden;
+      }
+
+      .fa-plus {
+        position: absolute;
+        top: ~'calc(50% - 18px)';
+        left: ~'calc(50% - 27px)';
+        font-size: 42px;
+      }
+
+      &:hover {
+        transform: none;
+        box-shadow: none;
+
+        .fa-plus {
+          color: #fff;
+        }
+      }
+    }
+  }
+
+}

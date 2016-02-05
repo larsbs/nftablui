@@ -1,0 +1,86 @@
+//---------------------------
+// MAIN SIDEBAR
+//
+// Author: Lorenzo Ruiz
+//---------------------------
+
+.main-sidebar {
+  width: @sidebar-width;
+  background: @sidebar-bg;
+  position: fixed;
+  top: @navbar-height;
+  bottom: 0;
+  left: 0;
+  border: @sidebar-border;
+  border-bottom: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: 11px;
+  padding: 10px 0 0;
+
+  > section {
+    &:extend(.clearfix all);
+
+    > .section-header {
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    > .nav {
+      text-transform: uppercase;
+      font-weight: bold;
+      border: @sidebar-border;
+      border-left: 0;
+      border-right: 0;
+      background: darken(@sidebar-bg, 2%);
+      padding: 5px 0;
+      padding-left: 20px;
+
+      &.nav-collapsible {
+        display: none;
+      }
+
+      > li > a {
+        background: none !important;
+        color: darken(@link-color, 30%);
+        padding: 5px 10px;
+
+        &:hover {
+          color: @link-color;
+        }
+
+        i {
+          top: 1px;
+        }
+      }
+    }
+
+    a {
+      position: relative;
+      display: block;
+      padding: @nav-link-padding;
+      line-height: 25px;
+
+      &:hover {
+        text-decoration: none;
+        background-color: @nav-link-hover-bg;
+      }
+
+      &:focus {
+        text-decoration: none !important;
+        outline: none !important;
+      }
+    }
+  }
+
+  i {
+    top: 3px;
+    position: relative;
+    margin-right: 2px;
+
+    &.fa-chevron-left {
+      top: 10px;
+      float: right;
+    }
+  }
+}

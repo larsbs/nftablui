@@ -1,0 +1,38 @@
+#############
+# NFTSERVER #
+#############
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+__pycache__
+*.py[cod]
+
+# Virtual envs
+.venv/
+
+# SQLite
+*.db
+
+# Build dir
+build/
+
+
+#############
+# NFTCLIENT #
+#############
+
+# compiled output
+dist
+tmp
+
+# dependencies
+node_modules
+bower_components
+
+# misc
+.sass-cache
+connect.lock
+coverage/*
+libpeerconnection.log
+npm-debug.log
+testem.log

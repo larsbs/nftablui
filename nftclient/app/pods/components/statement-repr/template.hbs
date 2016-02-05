@@ -1,0 +1,14 @@
+<!--<tr>-->
+{{#if statement.match}}
+  <td>{{statement.match}}</td>
+{{else}}
+  {{#if statement.set}}
+    <td>{{statement.set}}</td>
+  {{else}}
+    <td>{{statement.dictionary}}</td>
+  {{/if}}
+{{/if}}
+{{#unless statement.dictionary}}
+  <td>{{statement.action}}</td>
+{{/unless}}
+<!--</tr>-->

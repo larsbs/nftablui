@@ -1,0 +1,97 @@
+<div class="row">
+  <div class="col-md-8">
+    <h1 class="location-header"><small>Tabla</small> {{table.name}}</h1>
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group pull-right">
+      <button type="button" class="btn btn-default" {{action 'showEmptyConfirmationModal'}}><i class="fa fa-circle-o fa-fw"></i> Vaciar</button>
+      <button type="button" class="btn btn-default" {{action 'showDeleteConfirmationModal'}}><i class="fa fa-trash fa-fw"></i> Eliminar</button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="breadcrumb">
+      <li>
+        {{#link-to 'index'}}<i class="fa fa-home fa-fw"></i> Inicio{{/link-to}}
+      </li>
+      <li>
+        {{#link-to 'tables' table.family}}<i class="fa fa-database fa-fw"></i> {{table.family}}{{/link-to}}
+      </li>
+      <li>
+        <i class="fa fa-table fa-fw"></i> {{table.name}}
+      </li>
+    </div>
+  </div>
+</div>
+<ul class="list-inline cards-container">
+  {{#each table.chains as |chain|}}
+    <li>
+      {{#link-to 'chain' chain}}
+      <div class="card panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-chain fa-fw"></i> {{chain.name}}
+        </div>
+        <div class="panel-body">
+          <strong>Tipo:</strong> {{chain.type}}<br>
+          <strong>Hook:</strong> {{chain.hook}}<br>
+          <strong>Prioridad:</strong> {{chain.priority}}<br>
+          <strong>Reglas</strong> {{chain.rules.length}}<br>
+        </div>
+      </div>
+      {{/link-to}}
+    </li>
+  {{/each}}
+    <li>
+      <div class="card add-card panel panel-default" {{action 'showAddChainModal'}}>
+        <div class="panel-heading">
+          <i class="fa fa-chain fa-fw"></i> Placeholder
+        </div>
+        <div class="panel-body">
+          <strong>Tipo:</strong> <br>
+          <strong>Hook:</strong> <br>
+          <strong>Prioridad:</strong> <br>
+          <strong>Reglas</strong> <br>
+        </div>
+        <i class="fa fa-plus fa-fw"></i>
+      </div>
+    </li>
+</ul>
+
+{{#modal-dialog parent=this registerAs="addChainModal"
+    title="Añadir nueva cadena" okText="Añadir" dismissText="Cancelar" okListener="saveNewChain"}}
+    <form method="post" action="javascript:;">
+      <div class="form-group">
+        <label for="chainName" class="control-label">Nombre</label>
+        {{input id="chainName" class="form-control" type="text" placeholder="Nombre de la cadena" value=newChainName}}
+      </div>
+      <div class="form-group">
+        <label for="chainType" class="control-label">Tipo</label>
+        {{view "select" id="chainType" class="form-control" content=chainTypes value=newChainType prompt="----"}}
+      </div>
+      <div class="form-group">
+        <label for="chainHook" class="control-label">Hook</label>
+        {{view "select" id="chainHook" class="form-control" content=chainHooks value=newChainHook prompt="----"}}
+      </div>
+      <div class="form-group">
+        <label for="chainPriority" class="control-label">Prioridad</label>
+        {{input id="chainPriority" class="form-control" type="text" placeholder="Prioridad de la cadena" value=newChainPriority}}
+      </div>
+    </form>
+{{/modal-dialog}}
+
+{{#modal-dialog parent=this registerAs="emptyConfirmationModal"
+    title="Vaciar tabla" okText="Vaciar" dismissText="Cancelar" okListener="emptyTable"}}
+    <p>
+      ¿Estás seguro de querer vaciar la tabla <strong>{{table.name}}</strong>?
+      Esto borrará de manera irrecuperable las cadenas y las reglas que contiene.
+    </p>
+{{/modal-dialog}}
+
+{{#modal-dialog parent=this registerAs="deleteConfirmationModal"
+    title="Eliminar tabla" okText="Eliminar" dismissText="Cancelar" okListener="deleteTable"}}
+    <p>
+      ¿Estás seguro de querer eliminar la tabla <strong>{{table.name}}</strong>?
+      Esto borrará de manera irrecuperable la tabla y todas las cadenas y reglas que contiene.
+    </p>
+{{/modal-dialog}}

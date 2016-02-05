@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="location-header"><small>Estructuras</small> Diccionarios</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="breadcrumb">
+      <li>
+        {{#link-to 'index'}}<i class="fa fa-home fa-fw"></i> Inicio{{/link-to}}
+      </li>
+      <li>
+        <i class="fa fa-th fa-fw"></i> Diccionarios
+      </li>
+    </div>
+  </div>
+</div>
+<ul class="list-inline cards-container">
+  {{#each dictionaries as |dictionary|}}
+  <li {{action 'showEditDictionaryModal' dictionary}}>
+      <div class="card panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-th fa-fw"></i> {{dictionary.name}}
+        </div>
+        <div class="panel-body">
+          <strong>Familia:</strong> {{dictionary.table.family}}<br>
+          <strong>Tabla:</strong> {{dictionary.table.name}}<br>
+          <strong>Tipo clave:</strong> {{dictionary.keyDataType}}<br>
+          <strong>Tipo valor:</strong> {{dictionary.valueDataType}}<br>
+          <strong>Elementos:</strong> {{dictionary.keys.length}}<br>
+        </div>
+      </div>
+    </li>
+  {{/each}}
+</ul>
+
+{{#modal-dialog parent=this registerAs="editDictionaryModal"
+    title="Editar diccionario" okText="Actualizar" dismissText="Cancelar" okListener="editDictionary"}}
+  <form id="add-structure-form" action="javascript:;" method="post">
+    <div class="form-group">
+      <label class="control-label">Clase</label>
+      <input type="text" class="form-control" value="Diccionario" disabled>
+    </div>
+    <div class="form-group">
+      <label for="structureTable" class="control-label">Tabla</label>
+      <input type="text" class="form-control" value="{{selectedDictionary.table.verboseName}}" disabled>
+    </div>
+    <div class="form-group">
+      <label class="control-label">Nombre</label>
+      <input type="text" class="form-control" value="{{selectedDictionary.name}}" disabled>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-6">
+        <label class="control-label">Tipo de la clave</label>
+        <input type="text" class="form-control" value="{{selectedDictionary.keyDataType}}" disabled>
+      </div>
+      <div class="col-md-6">
+        <label class="control-label">Tipo del valor</label>
+        <input type="text" class="form-control" value="{{selectedDictionary.valueDataType}}" disabled>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="editDictionaryItems" class="control-label">Elementos (Añadir uno por línea de la forma Clave:Valor)</label>
+      {{textarea id="editDictionaryItems" class="form-control" value=selectedDictionary.itemsTextarea rows="5"}}
+    </div>
+  </form>
+{{/modal-dialog}}

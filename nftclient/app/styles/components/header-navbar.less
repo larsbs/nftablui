@@ -1,0 +1,19 @@
+.header-navbar {
+  border: @navbar-default-border;
+
+  .navbar-header {
+    width: @sidebar-width - 1px;
+    background: @navbar-default-header-bg;
+    border-right: @navbar-default-border;
+  }
+
+  .navbar-action {
+    .navbar-text;
+    cursor: pointer;
+    color: @navbar-default-link-color;
+
+    &:hover {
+      color: @navbar-default-link-hover-color;
+    }
+  }
+}

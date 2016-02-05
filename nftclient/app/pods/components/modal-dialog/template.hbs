@@ -1,0 +1,21 @@
+<div role="dialog" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" type="button" class="close">
+          <i class="fa fa-times fa-fw"></i>
+        </button>
+        <h4 class="modal-title">{{title}}</h4>
+      </div>
+      <div class="modal-body">{{yield}}</div>
+      <div class="modal-footer">
+        {{#if okListener}}
+          <button type="button" data-dismiss="modal" class="btn btn-default">{{dismissText}}</button>
+          <button type="button" {{action 'okClicked'}} class="btn btn-primary">{{okText}}</button>
+        {{else}}
+          <button data-dismiss="modal" type="button" class="btn btn-primary">{{dismissText}}</button>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>

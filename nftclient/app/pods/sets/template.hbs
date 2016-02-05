@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="location-header"><small>Estructuras</small> Conjuntos</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="breadcrumb">
+      <li>
+        {{#link-to 'index'}}<i class="fa fa-home fa-fw"></i> Inicio{{/link-to}}
+      </li>
+      <li>
+        <i class="fa fa-th fa-fw"></i> Conjuntos
+      </li>
+    </div>
+  </div>
+</div>
+<ul class="list-inline cards-container">
+  {{#each sets as |set|}}
+    <li {{action 'showEditSetModal' set}}>
+      <div class="card panel panel-default">
+        <div class="panel-heading">
+          <i class="fa fa-th fa-fw"></i> {{set.name}}
+        </div>
+        <div class="panel-body">
+          <strong>Familia:</strong> {{set.table.family}}<br>
+          <strong>Tabla:</strong> {{set.table.name}}<br>
+          <strong>Tipo:</strong> {{set.dataType}}<br>
+          <strong>Elementos:</strong> {{set.itemsArray.length}}<br>
+        </div>
+      </div>
+    </li>
+  {{/each}}
+</ul>
+
+{{#modal-dialog parent=this registerAs="editSetModal"
+    title="Editar conjunto" okText="Actualizar" dismissText="Cancelar" okListener="editSet"}}
+  <form id="edit-set-form" action="javascript:;" method="post">
+    <div class="form-group">
+      <label for="structureClass" class="control-label">Clase</label>
+      <input type="text" class="form-control" value="Conjunto" disabled>
+    </div>
+    <div class="form-group">
+      <label for="structureTable" class="control-label">Tabla</label>
+      <input type="text" class="form-control" value="{{selectedSet.table.verboseName}}" disabled>
+    </div>
+    <div class="form-group">
+      <label for="setName" class="control-label">Nombre</label>
+      <input type="text" class="form-control" value="{{selectedSet.name}}" disabled>
+    </div>
+    <div class="form-group">
+      <label for="setDataType" class="control-label">Tipo de datos</label>
+      <input type="text" class="form-control" value="{{selectedSet.dataType}}" disabled>
+    </div>
+    <div class="form-group">
+      <label for="editSetItems" class="control-label">Elementos (Añadir uno por línea)</label>
+      {{textarea id="editSetItems" class="form-control" value=selectedSet.itemsTextarea rows="5"}}
+    </div>
+  </form>
+{{/modal-dialog}}

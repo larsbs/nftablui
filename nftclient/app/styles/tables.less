@@ -1,0 +1,40 @@
+.table {
+  td, th {
+    vertical-align: middle !important;
+  }
+
+  .table-container {
+    padding: 0;
+    .table {
+      background: transparent;
+      margin: 0;
+
+      &.table-bordered {
+        border: 0;
+      }
+
+      td, th {
+        width: 50%;
+        border-left: 0;
+
+        &:last-child {
+          border-right: 0;
+        }
+      }
+
+      tr {
+        &:first-child {
+          td, th {
+            border-top: 0;
+          }
+        }
+
+        &:last-child {
+          td, th {
+            border-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}

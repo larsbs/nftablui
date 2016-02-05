@@ -1,0 +1,157 @@
+<div class="row">
+  <div class="col-md-8">
+    <h1 class="location-header"><small>Cadena</small> {{chain.name}}</h1>
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group pull-right">
+      <button type="button" class="btn btn-default" {{action 'showEmptyConfirmationModal'}}><i class="fa fa-circle-o fa-fw" ></i> Vaciar</button>
+      <button type="button" class="btn btn-default" {{action 'showDeleteConfirmationModal'}}><i class="fa fa-trash fa-fw"></i> Eliminar</button>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="breadcrumb">
+      <li>
+        {{#link-to 'index'}}<i class="fa fa-home fa-fw"></i> Inicio{{/link-to}}
+      </li>
+      <li>
+        {{#link-to 'tables' chain.table.family}}<i class="fa fa-database fa-fw"></i> {{chain.table.family}}{{/link-to}}
+      </li>
+      <li>
+        {{#link-to 'table' chain.table}}<i class="fa fa-table fa-fw"></i> {{chain.table.name}}{{/link-to}}
+      </li>
+      <li>
+        <i class="fa fa-chain fa-fw"></i> {{chain.name}}
+      </li>
+    </div>
+  </div>
+</div>
+<div class="table-container" style="margin: 0 15px;">
+  <button type="button" class="btn btn-primary" style="margin-bottom: 25px;" {{action 'showAddRuleModal'}}>
+    <i class="fa fa-plus fa-fw"></i> Añadir regla
+  </button>
+  <table class="table table-bordered table-striped table-hover" >
+    <colgroup>
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="100%" span="2">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Handle</th>
+        <th>Expression</th>
+        <th>Key</th>
+        <th colspan="2">Statement</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each chain.rules as |rule|}}
+      <tr>
+        <td>{{rule.handle}}</td>
+        <td>{{rule.expression}}</td>
+        <td>{{rule.key}}</td>
+        <td class="table-container">
+          <table class="table table-bordered">
+            <tbody>
+              {{#each rule.statements as |statement|}}
+                {{statement-repr statement=statement table=chain.table}}
+              {{/each}}
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+{{#modal-dialog parent=this registerAs="addRuleModal"
+    title="Añadir nueva regla" okText="Añadir" dismissText="Cancelar" okListener="saveNewRule"}}
+    <form method="post" action="javascript:;">
+      <div class="form-group">
+        <label for="ruleExpression" class="control-label">Expresión</label>
+        {{view "select" id="ruleExpression" class="form-control"
+            content=ruleExpressions optionValuePath="content.index" optionLabelPath="content.expression.label" value=newRuleExpressionIndex}}
+      </div>
+      <div class="form-group">
+        <label for="ruleKey" class="control-label">Clave</label>
+        {{view "select" id="ruleKey" class="form-control"
+            content=selectedExpressionKeys optionValuePath="content.id" optionLabelPath="content.label" value=newRuleKey}}
+      </div>
+      <div class="form-group">
+        <label for="ruleStatementType" class="control-label">Tipo de argumento</label>
+        {{view "select" id="ruleStatementType" class="form-control"
+            content=statementType optionValuePath="content.id" optionLabelPath="content.label" value=newRuleStatementType}}
+      </div>
+      {{#if newRuleStatementHardcoded}}
+      {{#each newRuleHardcodedArgs as |arg index|}}
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label class="control-label">Objetivo</label>
+          {{input class="form-control" value=arg.match}}
+        </div>
+        <div class="col-md-5">
+          <label class="control-label">Acciones (Separadas por coma)</label>
+          {{input class="form-control" value=arg.action}}
+        </div>
+        <div class="col-md-1">
+          <label class="control-label">&nbsp;</label>
+          <i class="fa fa-times fa-fw" style="font-size: 1.5em; position: relative; top: 9px; right: 18px; cursor: pointer" {{action 'removeStatementRow' index}}></i>
+        </div>
+      </div>
+      {{/each}}
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="newRuleMatch" class="control-label">Objetivo</label>
+          {{input id="newRuleMatch" class="form-control" value=newRuleMatch}}
+        </div>
+        <div class="col-md-5">
+          <label for="newRuleJumps" class="control-label">Acciones (Separadas por coma)</label>
+          {{input id="newRuleJumps" class="form-control" value=newRuleJumps}}
+        </div>
+        <div class="col-md-1">
+          <label class="control-label">&nbsp;</label>
+          <i class="fa fa-plus fa-fw" style="font-size: 1.5em; position: relative; top: 10px; right: 18px; cursor: pointer" {{action 'addStatementRow'}}></i>
+        </div>
+      </div>
+      {{/if}}
+      {{#if newRuleStatementSet}}
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="" class="control-label">Conjunto</label>
+          {{view "select" id="" class="form-control"
+              content=chain.table.sets optionValuePath="content.name" optionLabelPath="content.name" value=newRuleSetArg}}
+        </div>
+        <div class="col-md-6">
+          <label class="control-label">Acciones (Separadas por coma)</label>
+          {{input class="form-control" value=newRuleSetArgActions}}
+        </div>
+      </div>
+      {{/if}}
+      {{#if newRuleStatementDictionary}}
+      <div class="form-group">
+        <label for="" class="control-label">Diccionario</label>
+        {{view "select" id="" class="form-control"
+            content=chain.table.dictionaries optionValuePath="content.id" optionLabelPath="content.name" value=newRuleDictionaryArg}}
+      </div>
+      {{/if}}
+    </form>
+{{/modal-dialog}}
+
+{{#modal-dialog parent=this registerAs="emptyConfirmationModal"
+    title="Vaciar cadena" okText="Vaciar" dismissText="Cancelar" okListener="emptyChain"}}
+    <p>
+      ¿Estás seguro de querer vaciar la cadena <strong>{{chain.name}}</strong>?
+      Esto borrará de manera irrecuperable las reglas que contiene.
+    </p>
+{{/modal-dialog}}
+
+{{#modal-dialog parent=this registerAs="deleteConfirmationModal"
+    title="Eliminar cadena" okText="Eliminar" dismissText="Cancelar" okListener="deleteChain"}}
+    <p>
+      ¿Estás seguro de querer eliminar la cadena <strong>{{chain.name}}</strong>?
+      Esto borrará de manera irrecuperable la cadenas y todas las reglas que contiene.
+    </p>
+{{/modal-dialog}}

@@ -1,0 +1,47 @@
+<!-- <div class="main-sidebar"> -->
+  <section class="home">
+    <div class="section-header">
+      {{#link-to 'index'}}<i class="fa fa-home fa-fw fa-2x"></i> Inicio{{/link-to}}
+    </div>
+  </section>
+  <section class="tables collapsible">
+    <div class="section-header">
+      <a href="javascript:;"><i class="fa fa-table fa-fw fa-2x"></i> Tablas <i class="fa fa-chevron-left fa-fw"></i></a>
+    </div>
+    <ul class="nav nav-collapsible">
+      <li>
+        {{#link-to 'tables' 'ip'}}<i class="fa fa-minus fa-fw"></i> IP{{/link-to}}
+      </li>
+      <li>
+        {{#link-to 'tables' 'ip6'}}<i class="fa fa-minus fa-fw"></i> IP6{{/link-to}}
+      </li>
+      <li>
+        {{#link-to 'tables' 'inet'}}<i class="fa fa-minus fa-fw"></i> INET{{/link-to}}
+      </li>
+      <li>
+        {{#link-to 'tables' 'arp'}}<i class="fa fa-minus fa-fw"></i> ARP{{/link-to}}
+      </li>
+      <li>
+        {{#link-to 'tables' 'bridge'}}<i class="fa fa-minus fa-fw"></i> BRIDGE{{/link-to}}
+      </li>
+    </ul>
+  </section>
+  <section class="structures collapsible">
+    <div class="section-header">
+      <a href="javascript:;"><i class="fa fa-th fa-fw fa-2x"></i> Estructuras <i class="fa fa-chevron-left fa-fw"></i></a>
+    </div>
+    <ul class="nav nav-collapsible">
+      <li>
+        {{#link-to 'sets'}}<i class="fa fa-minus fa-fw"></i> CONJUNTOS{{/link-to}}
+      </li>
+      <li>
+        {{#link-to 'dictionaries'}}<i class="fa fa-minus fa-fw"></i> DICCIONARIOS{{/link-to}}
+      </li>
+    </ul>
+  </section>
+  <section class="files">
+    <div class="section-header">
+      {{#link-to 'files'}}<i class="fa fa-upload fa-fw fa-2x"></i> Archivos{{/link-to}}
+    </div>
+  </section>
+<!-- </div> -->
